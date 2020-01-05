@@ -1,0 +1,12 @@
+#将这个client注册到eureka那个项目的注册中心上面
+eureka:
+  client:
+    service-url:
+#    这个就是注册到注册中心的地址(注册到两个不同的server上面)
+      defaultZone: http://localhost:8761/eureka/, http://localhost:8762/eureka/
+#修改注册中心显示的client的status名字点击后的自定义的链接
+#  instance:
+#    hostname: clientName
+spring:
+  application:
+    name: client

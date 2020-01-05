@@ -1,0 +1,19 @@
+#将本应用作为client注册到注册中心上
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+#隐藏掉在注册中心的显示 与不会使项目报错
+    register-with-eureka: false
+#关闭掉页面上上线率低的警告
+  server:
+    enable-self-preservation: false
+#设置本应用在注册中心上的名字
+spring:
+  application:
+    name: eureka
+
+#在edit configurations通过VM options区分了两个应用
+#server:
+#  port: 8761
+
