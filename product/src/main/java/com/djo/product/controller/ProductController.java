@@ -1,5 +1,6 @@
 package com.djo.product.controller;
 
+import com.djo.product.DTO.CartDTO;
 import com.djo.product.VO.ProductInfoVO;
 import com.djo.product.VO.ProductVO;
 import com.djo.product.VO.ResultVO;
@@ -72,6 +73,25 @@ public class ProductController {
         }
 
         return ResultVOUtil.success(productVOList);
+    }
+
+    /**
+     * 获取商品列表(给订单服务用的)
+     * @param productIdList
+     * @return
+     */
+    @PostMapping("/listForOrder")
+    public List<ProductInfo> listForOrder(@RequestBody List<String> productIdList) {
+        return productService.findList(productIdList);
+    }
+
+    /**
+     * 扣减库存
+     * @param cartDTOList
+     */
+    @PostMapping("/decreaseStock")
+    public void decreaseStock(@RequestBody List<CartDTO> cartDTOList) {
+        productService.decreaseStock(cartDTOList);
     }
 
 }

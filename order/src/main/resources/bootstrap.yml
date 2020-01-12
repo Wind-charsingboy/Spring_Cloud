@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: order
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: CONFIG
+      profile: dev
+    bus:
+      id: ${spring.application.name}:${spring.cloud.config.profile}:${random.value}
+      enabled: true
+      env:
+        enabled: true
+logging:
+  level:
+    org.springframework.cloud.bus: debug
+

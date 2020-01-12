@@ -1,19 +1,19 @@
-#将本应用作为client注册到注册中心上
+#锟斤拷锟斤拷应锟斤拷锟斤拷为client注锟结到注锟斤拷锟斤拷锟斤拷锟斤拷
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
-#隐藏掉在注册中心的显示 与不会使项目报错
+#锟斤拷锟截碉拷锟斤拷注锟斤拷锟斤拷锟侥碉拷锟斤拷示 锟诫不锟斤拷使锟斤拷目锟斤拷锟斤拷
     register-with-eureka: false
-#关闭掉页面上上线率低的警告
+#锟截闭碉拷页锟斤拷锟斤拷锟斤拷锟斤拷锟绞低的撅拷锟斤拷
   server:
     enable-self-preservation: false
-#设置本应用在注册中心上的名字
+#锟斤拷锟矫憋拷应锟斤拷锟斤拷注锟斤拷锟斤拷锟斤拷锟较碉拷锟斤拷锟斤拷
 spring:
   application:
     name: eureka
 
-#在edit configurations通过VM options区分了两个应用
-#server:
-#  port: 8761
+#锟斤拷edit configurations通锟斤拷VM options锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷应锟斤拷
+server:
+  port: 8761
 

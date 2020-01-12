@@ -42,6 +42,7 @@ public class OrderController {
     @PostMapping("/create")
     public ResultVO<Map<String, String>> create(@Valid OrderForm orderForm,
                                                 BindingResult bindingResult) {
+        //1.参数校验
         if (bindingResult.hasErrors()){
             log.error("【创建订单】参数不正确, orderForm={}", orderForm);
             throw new OrderException(ResultEnum.PARAM_ERROR.getCode(),
@@ -54,6 +55,7 @@ public class OrderController {
             throw new OrderException(ResultEnum.CART_EMPTY);
         }
 
+        //2.调用商品服务（使用Feign）
         OrderDTO result = orderService.create(orderDTO);
 
         Map<String, String> map = new HashMap<>();
