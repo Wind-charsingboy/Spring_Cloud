@@ -12,7 +12,17 @@ spring:
       enabled: true
       env:
         enabled: true
+#   in order to two service situation, we send message to one service, but two receive
+    stream:
+      bindings:
+#      this myMessage is we define in @StreamListener
+        myMessage:
+#        this group name casual
+          group: order
+          content-type: application/json
+
 logging:
   level:
     org.springframework.cloud.bus: debug
+
 

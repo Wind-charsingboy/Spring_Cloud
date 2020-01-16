@@ -26,4 +26,14 @@ public class MqSend {
     public void send() {
         amqpTemplate.convertAndSend("myQueue", "now " + new Date());
     }
+
+
+    /**
+     * 模拟的是订单服务下单之后要发送消息
+     * 第一个参数就是exchange 第二个参数就是key 用来区分电脑和水果
+     */
+    @GetMapping("/sendOrder")
+    public void sendOrder() {
+        amqpTemplate.convertAndSend("myOrder","computer", "now " + new Date());
+    }
 }

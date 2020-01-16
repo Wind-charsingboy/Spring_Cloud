@@ -8,6 +8,8 @@ import com.djo.product.enums.ResultEnum;
 import com.djo.product.exception.ProductException;
 import com.djo.product.repository.ProductInfoRepository;
 import com.djo.product.service.ProductService;
+import com.rabbitmq.tools.json.JSONUtil;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,9 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductInfoRepository productInfoRepository;
 
+    @Autowired
+    private AmqpTemplate amqpTemplate;
+
     @Override
     public List<ProductInfo> findUpAll() {
         return productInfoRepository.findByProductStatus(ProductStatusEnum.UP.getCode());
@@ -45,8 +50,20 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    @Transactional
     public void decreaseStock(List<CartDTO> cartDTOList) {
+        List<ProductInfo> productInfoList = decreaseStockProcess(cartDTOList);
+        //发送mq消息
+        amqpTemplate.convertAndSend("productInfo", productInfoList.toString());
+    }
+
+    /**
+     * 专门操作对数据库的数据 整体库存扣减完之后 再整体返回
+     * @param cartDTOList
+     * @return
+     */
+    @Transactional
+    public List<ProductInfo> decreaseStockProcess(List<CartDTO> cartDTOList) {
+        List<ProductInfo> productInfoList = new ArrayList<>();
         for (CartDTO cartDTO : cartDTOList){
             Optional<ProductInfo> productInfoOptional = productInfoRepository.findById(cartDTO.getProductId());
             //判断商品是否存在
@@ -63,6 +80,8 @@ public class ProductServiceImpl implements ProductService {
 
             productInfo.setProductStock(result);
             productInfoRepository.save(productInfo);
+            productInfoList.add(productInfo);
         }
+        return productInfoList;
     }
 }
