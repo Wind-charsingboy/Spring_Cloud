@@ -17,11 +17,13 @@ eureka:
   #    myProduct:
   #      path: /myProduct/**
   #      serviceId: product
-zuul:
-  routes:
-    product: /myProduct/**
-  ignored-patterns:
-    - **/product/decreaseStock
+
+#  in github so delete
+#zuul:
+#  routes:
+#    product: /myProduct/**
+#  ignored-patterns:
+#    - **/product/decreaseStock
 
 
 
