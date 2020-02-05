@@ -81,7 +81,8 @@ public class ProductController {
      * @return
      */
     @PostMapping("/listForOrder")
-    public List<ProductInfo> listForOrder(@RequestBody List<String> productIdList) {
+    public List<ProductInfo> listForOrder(@RequestBody List<String> productIdList) throws InterruptedException {
+        Thread.sleep(2000);
         return productService.findList(productIdList);
     }
 

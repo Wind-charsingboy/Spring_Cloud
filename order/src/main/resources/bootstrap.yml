@@ -25,4 +25,24 @@ logging:
   level:
     org.springframework.cloud.bus: debug
 
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+#diferrent from default
+    getProductInfoList:
+      execution:
+              isolation:
+                thread:
+                  timeoutInMilliseconds: 3000
+
+
+
+
+
+
+
 
