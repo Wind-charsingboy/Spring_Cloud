@@ -37,9 +37,17 @@ hystrix:
       execution:
               isolation:
                 thread:
-                  timeoutInMilliseconds: 3000
+                  timeoutInMilliseconds: 1000
 
-
+# feign combine hystrix
+feign:
+  hystrix:
+    enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
 
 

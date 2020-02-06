@@ -1,8 +1,5 @@
 package com.example.apigateway.utils;
 
-
-import com.djo.user.vo.ResultVO;
-
 /**
  * Created by 廖师兄
  * 2017-12-10 18:03

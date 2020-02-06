@@ -13,7 +13,7 @@ import java.util.List;
  * 这个类里面定义要调用的哪些接口
  * 这个注解里面的name是应用的名字 代表的是我要访问product里面的msg接口
  */
-@FeignClient(name = "product")
+@FeignClient(name = "product", fallback = ProductClientFallback.class)
 public interface ProductClient {
 
     //这个和server端相匹配是通过@GetMapping中的路径相匹配的 和方法名字没有任何关系
@@ -37,5 +37,4 @@ public interface ProductClient {
      */
     @PostMapping("/product/decreaseStock")
     public void decreaseStock(@RequestBody List<CartDTO> cartDTOList);
-
 }
